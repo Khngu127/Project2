@@ -13,3 +13,6 @@ pip install Pillow  # For image processing (PIL fork)
 pip install mysqlclient
 
 if done correctly the program should look exactly like step4
+
+the Add item button and Edit button will bring you to their respective menus, delete will delete the row while clicking on ID or NAME will list
+it in ascending or descending order
