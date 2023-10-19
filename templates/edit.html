@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Item</title>
+</head>
+<body>
+    <h1>Edit Item</h1>
+    <form method="post" action="{{ url_for('edit', item_id=item.id) }}">
+        <label>Name: <input type="text" name="name" value="{{ item.name }}" required></label><br>
+        <label>Description: <textarea name="description">{{ item.description }}</textarea></label><br>
+        <label>Image URL: <input type="text" name="image" value="{{ url_for('static', filename=item.image) }}"></label><br>
+        <button type="submit">Save Changes</button>
+    </form>
+</body>
+</html>

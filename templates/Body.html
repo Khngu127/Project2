@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item List</title>
+     <script>
+        function toggleSort(column) {
+            var arrow = document.getElementById(column + '-arrow');
+            var currentOrder = arrow.dataset.order;
+            var newOrder = currentOrder === 'asc' ? 'desc' : 'asc';
+
+            arrow.dataset.order = newOrder;
+
+            // Redirect to the URL with the sorting parameter
+            window.location.href = '{{ url_for("index") }}?sort=' + column + '&order=' + newOrder;
+        }
+    </script>
+</head>
+<body>
+    <form action="{{ url_for('index') }}" method="get">
+        <label for="search">Search:</label>
+        <input type="text" name="search" id="search" value="{{ request.args.get('search', '') }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <table border="1">
+    <tr>
+        <th><a href="{{ url_for('index', sort_by='id_asc' if sort_by != 'id_asc' else 'id_desc') }}">ID {{ '▲' if sort_by == 'id_asc' else '▼' }}</a></th>
+        <th><a href="{{ url_for('index', sort_by='name_asc' if sort_by != 'name_asc' else 'name_desc') }}">Name {{ '▲' if sort_by == 'name_asc' else '▼' }}</a></th>
+        <th>Description</th>
+        <th>Image</th>
+        <th>Actions</th>
+    </tr>
+    {% for item in items %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.description }}</td>
+            <td>
+                {% if item.image %}
+                    <img src="{{ url_for('static', filename=item.image) }}" alt="Image">
+                {% else %}
+                    No Image
+                {% endif %}
+            </td>
+<td>
+    <form action="{{ url_for('edit', item_id=item.id) }}" method="get">
+        <button type="submit">Edit</button>
+    </form>
+    <form action="{{ url_for('delete', item_id=item.id) }}" method="post">
+        <button type="submit">Delete</button>
+    </form>
+</td>
+        </tr>
+    {% endfor %}
+</table>
+
+    <form action="{{ url_for('add') }}" method="get">
+        <button type="submit">Add Item</button>
+    </form>
+
+</body>
+</html>
