@@ -4,6 +4,8 @@ NOTE:
 mydb.sql should be imported into your MySQL database
 you will need to install the necessary imports through Pycharm
 
+These are the following pip commands I used:
+
 pip install Flask
 pip install Flask-SQLAlchemy
 pip install Pillow  # For image processing (PIL fork)
