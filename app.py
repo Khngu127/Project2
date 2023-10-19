@@ -49,12 +49,15 @@ def add():
         description = request.form['description']
         image = save_uploaded_file(request.files['image'])
 
+        # Find the smallest available ID with a gap
         available_ids = [id for id, in db.session.query(Item.id).order_by(Item.id)]
         new_id = find_smallest_gap(available_ids)
 
         new_item = Item(id=new_id, name=name, description=description, image=image)
         db.session.add(new_item)
         db.session.commit()
+
+        # Redirect to the index page after adding an item
         return redirect(url_for('index'))
 
     return render_template('Border.html', action='add', item=None)
@@ -77,7 +80,10 @@ def edit(item_id):
         item.description = request.form['description']
         item.image = save_uploaded_file(request.files['image'])
         db.session.commit()
+
+        # Redirect to the index page after editing an item
         return redirect(url_for('index'))
+
     return render_template('Border.html', action='edit', item=item, item_id=item_id)
 
 
