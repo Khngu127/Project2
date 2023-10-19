@@ -11,3 +11,5 @@ Implement the following operations:
 • Remove an item.
 All operations are web-based.
 You are free to select the programming language and the database management system.
+
+NOTE: the program should display an actual picture for image, but it displays an icon and word for me instead.
