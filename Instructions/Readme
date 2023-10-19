@@ -2,3 +2,14 @@ This the section for step by step instructions on how to perform the program
 
 NOTE:
 mydb.sql should be imported into your MySQL database
+you will need to install the necessary imports through Pycharm
+
+pip install Flask
+pip install Flask-SQLAlchemy
+pip install Pillow  # For image processing (PIL fork)
+
+//IF YOU DONT HAVE MYSQLCLIENT
+
+pip install mysqlclient
+
+if done correctly the program should look exactly like step4
